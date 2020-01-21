@@ -5,6 +5,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship
 from models.city import City
+import models
 
 
 class State(BaseModel, Base):
@@ -25,7 +26,7 @@ class State(BaseModel, Base):
         def cities(self):
             """for filestorage to match state_id with state.id"""
             city_list = []
-            c_dict = storage.all(City)
+            c_dict = models.storage.all(City)
             for c in c_dict.values():
                 if self.id == c.state_id:
                     city_list.append(c)
